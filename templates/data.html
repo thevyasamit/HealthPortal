@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card-wrapper">
+	<div class="card">
+		<h2 class="center">Patient List</h2>
+		<p> Select the contact number from the dropdown list below:</p>
+		<form action="{{ url_for('info') }}" name="info-form" method="POST">
+			<select name="val">
+				<option value="0">--Select a contact number to view info--</option>
+				{% for i in data %}
+				<option value="{{ i }}">{{ i }}</option>
+				{% endfor %}
+			</select><br>
+			<button type= "submit" class="btn">Next</button>
+	  	</form>
+<!-- 
+	  	<form action="{{ url_for('info') }}" name="info-form2" method="POST">
+			<select name="val2">
+				{% for i in data %}
+				<option value="0">--Select a name to view info--</option>
+				<option value="{{ i.name }}">{{ i.name }}</option>
+				{% endfor %}
+				<br>
+			</select>
+			<button type= "submit" class="btn">Submit</button>
+	  	</form>
+ -->
+			<!-- {% for i in data %}
+				<input type="submit" name="nm" value="{{ i.name }}" class="btn">
+			{% endfor %} -->
+			<!-- <select name="val" width="600px" >
+			  <option SELECTED value='0'>Select a name to view info</option>
+              {% for i in data %}
+              <option value="{{ i.name }}">{{ i.name }}</option>
+              {% endfor %}
+            </select><br> -->
+	
+		<!-- {% for i in data %}
+			<p> 
+				<strong>ID:</strong> {{ i._id }}<br>
+				<strong>Name:</strong> {{ i.name  }}<br>
+				<strong>Contact:</strong> {{ i.contact }}<br>
+				<strong>Age:</strong> {{ i.age }}<br>
+				<strong>Gender:</strong> {{ i.gender }}<br>
+				<strong>Data from sensors:</strong> {{ i.sensor }}}<br>
+				<strong>_______________________________________</strong>
+			</p> 
+			<p> Heart Beats recording: {{ i.audio }}</p>
+			<audio controls>
+		  		<source src="sound.wav" type="audio/wav">
+			</audio>
+			<button type="button" class="btn-one">Get info</button>
+		{% endfor %} -->
+		 
+	</div>
+</div>
+
+{% endblock %}

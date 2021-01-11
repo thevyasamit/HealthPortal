@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card-wrapper">
+	<div class="card">
+		<h1 class="center">Patient Information</h1>
+		{% for i in data %}
+			<strong>Name:</strong>{{ i.name }}<br>
+			<strong>ID:</strong>{{ i._id }}<br>
+			<strong>Contact:</strong>{{ i.contact }}<br>
+			<strong>Data from Sensor:</strong>{{ i.sensor[2] }}<br>
+			<p id = 'val1' hidden>  {{ i.sensor[1][16] }} </p>
+			<p id = 'val2' hidden> {{ i.sensor[1][17] }} </p>
+			<p id = 'audio' hidden > {{ i.audio }} </p>
+			
+			
+			<div class="gauge">
+				<p>Oxygen Level</p>
+				<div class="gauge__body">
+						<div class="gauge__fill">
+						</div>
+						<div class="gauge__cover">
+						</div>
+					</div>
+			</div>
+			<br>
+			<form action="{{ url_for('filename',filename = i.audio) }}" name="info-form" method="POST">
+				<strong>Heart Beats Audio Recording:</strong>
+				<button type= "submit" class="btn">play</button>
+			</form>
+			<!-- <audio src= "/static/music/59ffc94a-4dfd-4012-a24e-97906d5609f4.wav" type="audio/wav"
+			 controls > -->
+			<p>_____________________________________</p><br>
+			<script>
+					const gaugeElement = document.querySelector(".gauge");
+					function setGaugeValue(gauge, value) {
+				  		if (value < 0 || value > 1) {
+				  		  return;
+				  		}
+						gauge.querySelector(".gauge__fill").style.transform = `rotate(${value/2}turn)`;
+				  		gauge.querySelector(".gauge__cover").textContent = `${Math.round(value * 100)}%`;
+					}
+					var val1 = document.getElementById("val1").innerHTML;
+					var val2 = document.getElementById("val2").innerHTML;
+					var val1 = +val1
+					var val2 = +val2
+					var res = val1*10 +val2; 
+					console.log(val1,val2,res);
+					setGaugeValue(gaugeElement, res/100);
+			</script>
+		
+			<!-- <script type="text/javascript">
+				const kSampleRate = 44100; // Other sample rates might not work depending on the your browser's AudioContext
+				const kNumSamples = 16834;
+				const kFrequency  = 440;
+				const kPI_2       = Math.PI * 2;
+
+				function play_buffersource() {
+				    if (!window.AudioContext) {
+				        if (!window.webkitAudioContext) {
+				            alert("Your browser sucks because it does NOT support any AudioContext!");
+				            return;
+				        }
+				        window.AudioContext = window.webkitAudioContext;
+				    }
+
+				    var ctx = new AudioContext();
+				    var data = document.getElementById("aud").innerHTML;
+				    var buffer = ctx.createBuffer(1, kNumSamples, kSampleRate);
+				    var buf    = buffer.getChannelData(1);
+				    for (i = 0; i < kNumSamples; ++i) {
+				        buf[i] = Math.sin(kFrequency * kPI_2 * i / kSampleRate);
+				    }
+
+				    var node = ctx.createBufferSource(0);
+				    node.buffer = buffer;
+				    node.connect(ctx.destination);
+				    node.noteOn(ctx.currentTime + 0.5);
+
+				    node = ctx.createBufferSource(0);
+				    node.buffer = buffer;
+				    node.connect(ctx.destination);
+				    node.noteOn(ctx.currentTime + 2.0);
+				}
+			</script> -->
+
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

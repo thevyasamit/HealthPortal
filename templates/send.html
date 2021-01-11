@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card-wrapper">
+	<div class="card">
+		<h1 class="center">Patient Information</h1>
+		<form name = "patient-form"  method="POST">
+			<label for = "contact"> Contact </label>
+			<input type="tel" name="contact" class="field" required>
+			<br>
+			<label for = "name"> Name </label>
+			<input type="text" name="name" class="field" required>
+			<br>
+			<label for = "age"> Age </label>
+			<input type="number" name="age" class="field" required>
+			<br>
+			<label for = "gender"> Gender </label>
+			<input type="text" name="gender" class="field" required>
+			<br>
+			<input type="submit" value="Submit" class="btn">
+		</form>
+	</div>
+</div>
+
+{% endblock %}
