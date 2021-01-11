@@ -6,7 +6,7 @@ import time, uuid
 import pyaudio, wave
 
 
-client = pymongo.MongoClient('mongodb://10.6.0.179:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
+client = pymongo.MongoClient('mongodb://ENTER IP ADDRESS HERE/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
 db = client.healthDB
 
 # client = pymongo.MongoClient('localhost',27017)
@@ -69,8 +69,6 @@ def userData():
 	for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
 	    data = stream.read(CHUNK)
 	    frames.append(data)
-
-	print("* done recording")
 
 	stream.stop_stream()
 	stream.close()
